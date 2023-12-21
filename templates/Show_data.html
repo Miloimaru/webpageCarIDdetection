@@ -1,0 +1,82 @@
+<!Doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ObjectDetection-YOLOv8</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+    <style>
+        .set_txt{
+      position: absolute;
+      top: 100px;
+      left: 200px;
+    }
+
+    .set_button{
+      position: absolute;
+      left: 200px;
+      }
+    table {
+        margin-left: 200px;
+        margin-top: 100px;
+      border-collapse: collapse;
+      width: 80%;
+    }
+    th, td {
+      border: 1px solid #dddddd;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    td.date-column,
+    td.car-id-column {
+      text-align: center;
+    }
+    td.picture-column img {
+      max-width: 500px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    </style>
+</head>
+<body>
+<nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">ObjectDetection-YOLOv8</a>
+      </div>
+</nav>
+    <div class="set_txt"> <h1>Data from SQLite Database</h1></div>
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>picture</th>
+                <th>Car ID</th>
+            </tr>
+        </thead>
+    <tbody>
+        {% for row in data %}
+        <tr>
+            <td class="date-column">{{ row[0] }}</td>
+            <td class="picture-column">{% if row[1] %}<img src="data:image/jpeg;base64,{{ row[1] }}" alt="Car Image" >{% endif %}</td>
+            <td class="car-id-column">{{ row[2] }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+<div class="set_button"><button class="back-button" onclick="goBack()">Back</button></div>
+
+<script>
+        // Function to go back to the previous page
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>
